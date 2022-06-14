@@ -20,19 +20,19 @@ function singleRound(playerSelection , computerSelection) {
              (playerSelection === "paper" && computerSelection === "rock") || 
              (playerSelection === "scissors" && computerSelection === "paper")) {
       playerScore++;         
-      return "You Won the Round!";
+      return `You Won the Round! ${playerSelection} > ${computerSelection}`;
   } else if ((computerSelection === "rock" && playerSelection === "scissors") || 
              (computerSelection === "paper" && playerSelection === "rock") || 
              (computerSelection === "scissors" && playerSelection === "paper")) {
       compScore++;         
-      return "You Lose. Comp Won the Round :[";
+      return `You Lose. Comp Won the Round :[ ${computerSelection} > ${playerSelection}`;
   } else {
       return "Huh? Please input a valid response!"
   }
 }
 
 let prePlayerSelection = prompt("Choose: Rock, Paper, Scissors?");
-let playerSelection = prePlayerSelection.toString().toLowerCase(); //toString() converts the array^ from object to a string only then can it be used with .toLowerCase() , also switched from const to let because player choice is never "constant"
+let playerSelection = prePlayerSelection.toLowerCase(); //toString() converts the array^ from object to a string only then can it be used with .toLowerCase() , also switched from const to let because player choice is never "constant"
 const computerSelection = computerPlay();
 let playerScore = 0;
 let compScore = 0;
@@ -53,6 +53,12 @@ function game(){ //***IMPORTANT:***REFER TO BOTTOM NOTES FOR IMPORTANT ANALYSIS 
     console.log("Your Score:" + playerScore);
     console.log("Comp Score:" + compScore);
   }
+  
+  if(playerScore > compScore) {
+    console.log(`Congrats! You win the game! Final Score: ${playerScore}`);
+  } else {
+    console.log("Sorry :[ You have lost the game. Try Again!");
+  }
 }
 
 game(); //< this is needed to call the game func and displays all game's console.log in console!
@@ -68,7 +74,8 @@ game(); //< this is needed to call the game func and displays all game's console
 // e) OPTIONAL: create "helper" func if u think theyd be useful
 
 //PROJECT NOTES:
-// NOTE: rps needed to be all lower case for everything to work (case-sensitivity-wise) as intended.
+// NOTE(6/14/22): can input whatever casing in options but result comes out as lowercase to do func. Try to make it first letter capitalized
+// NOTE(6/14/22): prompt pops up 6x times not 5 and it doesnt count first choice, only starts to count after 2nd input. FIX THIS!
 
 /*{{{FUNC game() ANALYSIS: 
 Before the same result kept displaying for all 5 rounds because: it was just calling that same "singleround()" 5x, 
